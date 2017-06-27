@@ -1,5 +1,4 @@
-module.exports = function (api) {
+module.exports = api => {
   api.gen('articles', (socket, db) => {
-    console.log('SOCKET: Listening articles...')
   })
 }

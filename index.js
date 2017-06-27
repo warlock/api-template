@@ -1,15 +1,15 @@
 const express = require('express'),
   bodyParser = require('body-parser'),
-  conf = require('./conf.json'),
+  conf = require('./conf'),
   cors = require('cors'),
   io = require('socket.io')({ transports: ['websocket'] }),
   app = express(),
-  http_gen = require('./server/http_gen.js'),
-  socket_gen = require('./server/socket_gen.js'),
-  db_gen = require('./server/db_gen.js'),
+  http_gen = require('./server/http_gen'),
+  socket_gen = require('./server/socket_gen'),
+  db_gen = require('./server/db_gen'),
   db = db_gen(),
-  http_req = require('./scaffold/http.js'),
-  socket_req = require('./scaffold/socket.js')
+  http_req = require('./scaffold/http'),
+  socket_req = require('./scaffold/socket')
 
 app.use(cors())
 app.use('/public', express.static('public'))
