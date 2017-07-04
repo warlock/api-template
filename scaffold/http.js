@@ -17,5 +17,8 @@ module.exports = api => {
   })
 
   api.gen('articles',  (http, db) => {
+    http.get('/articles/hello', (req, res) => {
+      res.json({ res : "Hello world" })
+    })
   })
 }
