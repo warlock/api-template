@@ -1,4 +1,4 @@
-const schema = require('../schema.json')
+const schema = require('../schema')
 const sb = require('spellbook')
 
 const check = (val, type) => {
@@ -15,7 +15,7 @@ const res = type => {
   case 'number':
     return 123
   case 'function':
-    return function() {}
+    return () => {}
   case 'object':
     return { object : 'object' }
   default:
