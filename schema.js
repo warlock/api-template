@@ -1,0 +1,14 @@
+module.exports = {
+  users: {
+    username: "string",
+    surname: "string",
+    password: "string"
+  },
+  articles: {
+    title: "string",
+    creation: "date",
+    tags: "string",
+    content: "text",
+    author: "string"
+  }
+}
