@@ -1,6 +1,8 @@
 module.exports = serv => {
   return {
     gen : (model, callback) => {
+      if (Object.prototype.toString.call(callback) == '[object Function]') callback(serv.http, serv.db)
+
       serv.http.route(`/${model}`)
         .post((req, res) => {
           console.log(`${model} POST!`)
@@ -55,7 +57,6 @@ module.exports = serv => {
           })
         })
 
-      if (Object.prototype.toString.call(callback) == '[object Function]') callback(serv.http, serv.db)
     }
   }
 }
