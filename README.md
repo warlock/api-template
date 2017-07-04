@@ -1,5 +1,5 @@
-# RxApi
->Run the minimal API HTTP RESTFULL and WEBSOCKETS in memory database for make a fast dumy testing.
+# RxApi (DEVELOPMENT VERSION)
+> FAST HTTP & WEBSOCKETS API GENERATOR
 >
 >https://warlock.gitbooks.io/rxapi/content/
 >
@@ -21,20 +21,20 @@ npm i
 ```
 
 
-### Generate models schema in 'schema.json'
-```json
-{
-  "users": {
-    "username" : "string",
-    "surname" : "string",
-    "password" : "string"
+### Generate models schema in 'schema.js'
+```js
+module.exports = {
+  users: {
+    username : "string",
+    surname : "string",
+    password : "string"
   },
-  "articles": {
-    "title" : "string",
-    "creation" : "date",
-    "tags" : "string",
-    "content" : "text",
-    "author" : "string"
+  articles: {
+    title : "string",
+    creation : "date",
+    tags : "string",
+    content : "text",
+    author : "string"
   }
 }
 
@@ -91,30 +91,30 @@ Articles demo:
 ### Add fast features in HTTP with callback:
 ```js
 api.gen('users', (http, db) => {
-  db.loadDatabase(err => {
-    if (err) throw Error(`DB USER: Have a problem loading db ${err}`)
-    else {
-      db.insert({
-        "username" : "user",
-        "name" : "user_name",
-        "surname" : "user_surname",
-        "password" : "password"
-      },
-      (err, newDoc) => {
-        if (err) throw Error(`DB USER: Have a problem inserting in db ${err}!`);
-        else console.log(`DB USER: Default user created!`);
-      })
-    }
+  console.log("HTTP USERS API LISTENING")
+
+  http.get('/users/start/', (req, res) => {
+    db('users').insert({
+      username: "username",
+      surname: "surname",
+      password: "password"
+    })
+    .then(res => {
+      res.json(res)
+    })
+    .catch(err => {
+      res.json(err)
+    })
   })
+
 })
 ```
 
 ### Add fast features in SOCKET with callback:
 ```js
 api.gen('articles', (socket, db) => {
-  db.find({ _id : FX8REOZyumD022XE }, (err, docs) => {
-    if (err) console.error(`Error... ${err}`);
-    else console.log(`Results: ${JSON.stringify(docs}`);
+  socket.on('helloArticles', data => {
+    socket.emit('responseArticles', "hello!")
   })
 })
 ```
@@ -124,6 +124,7 @@ api.gen('articles', (socket, db) => {
 - Express.js [http://expressjs.com/](http://expressjs.com)
 - Socket.io [http://socket.io](http://socket.io)
 - Body-parser [https://github.com/expressjs/body-parser](https://github.com/expressjs/body-parser)
+- Knex [http://knexjs.org](http://knexjs.org)
 - NeDB [https://github.com/louischatriot/nedb](https://github.com/louischatriot/nedb)
 - Spellbook [http://www.spellbook.io](http://www.spellbook.io)
 - Nexo [https://github.com/warlock/nexo](https://github.com/warlock/nexo)
