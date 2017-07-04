@@ -22,8 +22,11 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.3",
     "express": "^4.15.3",
+    "knex": "^0.13.0",
+    "mysql": "^2.13.0",
     "nedb": "^1.8.0",
     "socket.io": "^2.0.3",
-    "spellbook": "0.1.23"
+    "spellbook": "0.1.23",
+    "sqlite3": "^3.1.8"
   }
 }
