@@ -2,6 +2,7 @@ module.exports = {
   http_port: 3000,
   sockets_port: 3001,
   mode: 'development',
+  http_api_route: '/api',
   database: {
     production : {
       client: 'mysql',
@@ -19,5 +20,10 @@ module.exports = {
         filename: "./tmp/mydb.sqlite"
       }
     }
-  }
+  },
+  public : {
+    enable : true,
+    folder : 'public'
+  },
+  cors : true
 }

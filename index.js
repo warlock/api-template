@@ -11,22 +11,24 @@ const express = require('express'),
   http_req = require('./scaffold/http'),
   socket_req = require('./scaffold/socket')
 
-app.use(cors())
-app.use('/public', express.static('public'))
+if (conf.cors) app.use(cors())
+if (conf.public.enable) app.use('/', express.static(conf.public.folder))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-  res.json({ status : true,  info : 'https://www.npmjs.com/package/rxapi' })
+app.get(conf.http_api_route, (req, res) => {
+  if (conf.mode === 'development') res.json({ status : 'development', system: "RxApi", Documentation : 'https://warlock.gitbooks.io/rxapi/content/', URL : 'https://www.npmjs.com/package/rxapi' })
+  else res.send("")
 })
 
 app.listen(conf.http_port, () => {
-  console.log(`HTTP: ${conf.http_port} SOCKETS: ${conf.sockets_port}`)
+  console.log(`HTTP PORT: ${conf.http_port}`)
   http_req(http_gen({ http : app, db : db }))
 })
 
 io.attach(conf.sockets_port)
 
 io.on('connection', socket => {
+  console.log(`PORT SOCKETS: ${conf.sockets_port}`)
   socket_req(socket_gen({ socket : socket, db : db }))
 })
