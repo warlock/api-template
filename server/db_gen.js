@@ -10,10 +10,10 @@ module.exports = () => {
         table[schema[model][value]](value)
       })
     }).then(() => {
-      console.log(`Table created: ${model}`)
+      console.log(`Database -> ENTITY: ${model}`)
     })
     .catch(err => {
-      console.error(err)
+      console.error(`Database -> ERROR: ${err}`)
     })
   })
   return knex
