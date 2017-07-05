@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <script src="http://localhost:3000/public/socket.io-1.4.5.js"></script>
-    <script src="http://localhost:3000/public/nexo.js"></script>
+    <script src="http://localhost:3000/socket.io-1.4.5.js"></script>
+    <script src="http://localhost:3000/nexo.js"></script>
   </head>
   <body>
     <h1>HTML FOR DEMO:</h1>
@@ -45,7 +45,7 @@
         })
 
         n.on(n.id('getHttp'), 'click', () => {
-          fetch("http://localhost:3000/articles", {
+          fetch("http://localhost:3000/api/articles", {
 	            method: 'get'
           })
           .then(res => {
@@ -63,7 +63,7 @@
               return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
           }).join('&');
 
-          fetch("http://localhost:3000/articles", {
+          fetch("http://localhost:3000/api/articles", {
             method: 'POST',
             headers: {
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
