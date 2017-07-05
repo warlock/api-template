@@ -1,7 +1,6 @@
 # RxApi - FAST HTTP & WEBSOCKETS API GENERATOR
 >
 >https://warlock.gitbooks.io/rxapi/content
->
 >https://www.npmjs.com/package/rxapi
 >
 
