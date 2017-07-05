@@ -1,11 +1,9 @@
-# RxApi (DEVELOPMENT VERSION)
-> FAST HTTP & WEBSOCKETS API GENERATOR
+# RxApi - FAST HTTP & WEBSOCKETS API GENERATOR
 >
 >https://warlock.gitbooks.io/rxapi/content/
 >
 >https://www.npmjs.com/package/rxapi
 >
->https://github.com/warlock/nodejs-api-rest-tester
 
 ### Install from npm
 ```sh
@@ -15,8 +13,8 @@ rxapi new project
 
 ### Git Install
 ```sh
-git clone https://github.com/warlock/nodejs-api-rest-tester.git
-cd nodejs-api-rest-tester
+git clone https://github.com/warlock/api-template.git
+cd api-template
 npm i
 ```
 
