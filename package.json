@@ -1,7 +1,7 @@
 {
   "name": "rxapi-git",
   "version": "0.0.1",
-  "description": "Run the minimal API HTTP RESTFULL and WEBSOCKETS in memory database for make a fast dumy testing.",
+  "description": "API HTTP RESTFULL & WEBSOCKETS SERVER",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "mysql": "^2.13.0",
-    "nedb": "^1.8.0",
     "socket.io": "^2.0.3",
     "spellbook": "0.1.23",
     "sqlite3": "^3.1.8"
