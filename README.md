@@ -16,81 +16,87 @@ git clone https://github.com/warlock/api-template.git
 cd api-template
 npm i
 ```
-
-
-### Generate models schema in 'schema.js'
+### Basic configuration:
 ```js
 module.exports = {
-  users: {
-    username : "string",
-    surname : "string",
-    password : "string"
+  http_port: 3000,
+  sockets_port: 3001,
+  mode: 'development', // knex database configuration
+  //http_api_route: '/api',
+  public : {
+    enable : true,
+    folder : 'public'
   },
-  articles: {
-    title : "string",
-    creation : "date",
-    tags : "string",
-    content : "text",
-    author : "string"
+  cors : true,
+  sockets : true
+};
+```
+
+### Database configuration and "knex" migrations:
+Document database configuration "./knexfile.js":
+```js
+module.exports = {
+  development: {
+    client: 'sqlite3',
+    connection: {
+      filename: './dev.sqlite3'
+    }
+  },
+  staging: {
+    client: 'postgresql',
+    connection: {
+      database: 'my_db',
+      user:     'username',
+      password: 'password'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+  production: {
+    client: 'postgresql',
+    connection: {
+      database: 'my_db',
+      user:     'username',
+      password: 'password'
+    },
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: 'knex_migrations'
+    }
   }
-}
-
+};
 ```
 
-### Generate HTTP RESTFULL scaffold in 'scaffold/http.js':
+### HTTP Router:
+Router configuration file in "./http/router.js":
 ```js
-module.exports = api => {
+const users = require('./routes/users');
+const articles = require('./routes/articles');
 
-  api.gen('articles')
+module.exports = (app, db, http) => {
 
-}
+  app.use('/articles', articles(db));
+  app.use('/users', users(db));
+
+};
 ```
 
-### Generate SOCKET.IO scaffold in 'scaffold/socket.js':
+### HTTP Routes configuration:
+Files in "./http/routes/users.js"
 ```js
-module.exports = api => {
+const http = require('express').Router();
 
-  api.gen('articles' (socket, db) => {
-    console.log('SOCKET Articles listening...')
-  })
+module.exports = db => {
 
-}
-```
-
-### Run
-```sh
-npm start
-```
-
-### HTTP API RESTFULL Routes
-Articles demo:
-
-| HTTP Route             | Verb     | Description                    |
-| ---------------------- |:--------:| ------------------------------:|
-| /articles              |  GET     | Get all articles               |
-| /articles              |  POST    | Create a article               |
-| /articles/:article_id  |  GET     | Get a single article           |
-| /articles/:article_id  |  PUT     | Update a article with new info |
-| /articles/:article_id  |  DELETE  | Delete article                 |
-
-
-### SOCKET.IO SCAFFOLD
-Articles demo:
-
-| Emit and events   | Description                    |
-| ----------------- | ------------------------------:|
-| articlesGetAll    | Get all articles               |
-| articlesAdd       | Create a article               |
-| articlesGet       | Get a single article           |
-| articlesUpdate    | Update a article with new info |
-| articlesDelete    | Delete article                 |
-
-### Add fast features in HTTP with callback:
-```js
-api.gen('users', (http, db) => {
-  console.log("HTTP USERS API LISTENING")
-
-  http.get('/users/start/', (req, res) => {
+  http.get('/firstUser', (req, res) => {
     db('users').insert({
       username: "username",
       surname: "surname",
@@ -102,30 +108,50 @@ api.gen('users', (http, db) => {
     .catch(err => {
       res.json(err)
     })
-  })
+  });
 
-})
+  http.get('/bye', (req, res) => {
+    res.json({ response : "bye" });
+  });
+
+  return http;
+};
 ```
 
-### Add fast features in SOCKET with callback:
+### Web sockets events configuration:
+Files in "./sockets/events.js"
 ```js
-api.gen('articles', (socket, db) => {
-  socket.on('helloArticles', data => {
-    socket.emit('responseArticles', "hello!")
-  })
-})
+module.exports = (socket, db) => {
+
+  socket.on('hello', data => {
+    console.log(`Hello ${data.name}`);
+  });
+
+};
 ```
 
+## Middleware or helpers in folder "./helpers"
+
+### Run server:
+```sh
+npm start
+```
+
+### Knex basics:
+```sh
+sudo npm i knex -g
+
+knex init # Create a empty knexfile.js
+knex migrate:latest # Run the last migration
+knex migrate:make users # Create a new migration
+
+```
 
 ### Dependencies thanks
 - Express.js [http://expressjs.com/](http://expressjs.com)
 - Socket.io [http://socket.io](http://socket.io)
-- Body-parser [https://github.com/expressjs/body-parser](https://github.com/expressjs/body-parser)
 - Knex [http://knexjs.org](http://knexjs.org)
-- NeDB [https://github.com/louischatriot/nedb](https://github.com/louischatriot/nedb)
-- Spellbook [http://www.spellbook.io](http://www.spellbook.io)
-- Nexo [https://github.com/warlock/nexo](https://github.com/warlock/nexo)
-
+- Body-parser [https://github.com/expressjs/body-parser](https://github.com/expressjs/body-parser)
 
 ### License
 
