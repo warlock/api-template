@@ -1,4 +1,4 @@
-# RxApi - FAST HTTP & WEBSOCKETS API GENERATOR
+# RxApi - HTTP & WEBSOCKETS API
 >
 >https://warlock.gitbooks.io/rxapi/content
 >https://www.npmjs.com/package/rxapi
@@ -137,14 +137,13 @@ module.exports = (socket, db) => {
 npm start
 ```
 
-### Knex basics:
+### Knex database basics:
 ```sh
-sudo npm i knex -g
-
+sudo npm i knex -g # Install service in console
 knex init # Create a empty knexfile.js
 knex migrate:latest # Run the last migration
 knex migrate:make users # Create a new migration
-
+knex migrate:rollback  # Remove changes
 ```
 
 ### Dependencies thanks
