@@ -2,8 +2,8 @@
 
 module.exports = (socket, db) => {
 
-  socket.on('hello', data => {
-    console.log(`Hello ${data.name}`);
+  socket.on('event', data => {
+
   });
 
 };
