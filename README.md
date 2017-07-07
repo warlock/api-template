@@ -1,6 +1,7 @@
 # RxApi - HTTP & WEBSOCKETS API
 >
->https://warlock.gitbooks.io/rxapi/content
+>https://warlock.gitbooks.io/rxapi
+>
 >https://www.npmjs.com/package/rxapi
 >
 
@@ -16,6 +17,7 @@ git clone https://github.com/warlock/api-template.git
 cd api-template
 npm i
 ```
+
 ### Basic configuration:
 ```js
 module.exports = {
