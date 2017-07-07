@@ -11,10 +11,9 @@ const express = require('express'),
 
 if (conf.sockets) io.attach(conf.sockets_port);
 if (conf.cors) app.use(cors());
-if (conf.public.enable) app.use('/', express.static(conf.public.folder));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-gen_router(app, knex, express);
+gen_router(app, knex, express, conf);
 
 app.listen(conf.http_port, () => {
   console.log(`HTTP PORT: ${conf.http_port}`);
