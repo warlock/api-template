@@ -4,31 +4,23 @@ const express = require('express'),
   cors = require('cors'),
   io = require('socket.io')({ transports: ['websocket'] }),
   app = express(),
-  http_gen = require('./server/http_gen'),
-  socket_gen = require('./server/socket_gen'),
-  db_gen = require('./server/db_gen'),
-  db = db_gen(),
-  http_req = require('./scaffold/http'),
-  socket_req = require('./scaffold/socket')
+  knexfile = require('./knexfile'),
+  knex = require('knex')(knexfile[conf.mode]),
+  gen_router = require('./http/router'),
+  ws = require('./sockets/events.js');
 
-if (conf.cors) app.use(cors())
-if (conf.public.enable) app.use('/', express.static(conf.public.folder))
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-
-app.get(conf.http_api_route, (req, res) => {
-  if (conf.mode === 'development') res.json({ status : 'development', system: "RxApi", Documentation : 'https://warlock.gitbooks.io/rxapi/content/', URL : 'https://www.npmjs.com/package/rxapi' })
-  else res.send("")
-})
+if (conf.sockets) io.attach(conf.sockets_port);
+if (conf.cors) app.use(cors());
+if (conf.public.enable) app.use('/', express.static(conf.public.folder));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+gen_router(app, knex, express);
 
 app.listen(conf.http_port, () => {
-  console.log(`HTTP PORT: ${conf.http_port}`)
-  http_req(http_gen({ http : app, db : db }))
-})
-
-io.attach(conf.sockets_port)
+  console.log(`HTTP PORT: ${conf.http_port}`);
+});
 
 io.on('connection', socket => {
-  console.log(`PORT SOCKETS: ${conf.sockets_port}`)
-  socket_req(socket_gen({ socket : socket, db : db }))
-})
+  console.log(`PORT SOCKETS: ${conf.sockets_port}`);
+  ws(socket, knex);
+});
