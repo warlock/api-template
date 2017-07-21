@@ -12,9 +12,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Josep Subils Rigau <josep@spellbook.io> (http://spellbook.io)",
+  "author": "Josep Subils <js@js.gl> (http://js.gl)",
   "license": "MIT",
-  "homepage": "https://github.com/warlock/nodejs-api-rest-tester",
+  "homepage": "https://rxapi.js.gl",
   "bugs": {
     "url": "https://github.com/warlock/nodejs-api-rest-tester/issues"
   },
