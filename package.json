@@ -20,12 +20,12 @@
   },
   "dependencies": {
     "body-parser": "^1.17.2",
-    "cors": "^2.8.3",
+    "cors": "^2.8.4",
     "express": "^4.15.3",
     "knex": "^0.13.0",
-    "mysql": "^2.13.0",
+    "mysql": "^2.14.1",
     "socket.io": "^2.0.3",
-    "spellbook": "^1.0.0",
+    "spellbook": "^1.0.2",
     "sqlite3": "^3.1.8"
   }
 }
