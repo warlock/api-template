@@ -1,25 +1,47 @@
-# RxApi - HTTP & WEBSOCKETS API
+> API HTTP RESTFULL and WEBSOCKETS SERVER
 >
-> https://rxapi.js.gl
->
+> [https://rxapi.js.gl](https://rxapi.js.gl)
 
-### Run with npx
-```sh
-npx rxapi new project
-```
-
-### npx help
+## NPX
+### Help
 ```sh
 npx rxapi
 ```
 
-### Install from npm
+### Create a new project
+```sh
+npx rxapi new project
+```
+
+### Create a new dummy
+```sh
+npx rxapi dummy project
+```
+
+## NPM
+### Install client from npm
 ```sh
 sudo npm i rxapi -g
+```
+
+## YARN
+### Install client from yarn
+```sh
+yarn global add
+```
+
+## Console RxAPI client
+### Create a project
+```sh
 rxapi new project
 ```
 
-### Git Install
+### Create a dummy server
+```sh
+rxapi dummy project
+```
+
+## Download project server with Git
 ```sh
 git clone https://github.com/warlock/api-template.git
 cd api-template
