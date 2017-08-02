@@ -3,6 +3,16 @@
 > https://rxapi.js.gl
 >
 
+### Run with npx
+```sh
+npx rxapi new project
+```
+
+### npx help
+```sh
+npx rxapi
+```
+
 ### Install from npm
 ```sh
 sudo npm i rxapi -g
