@@ -11,6 +11,7 @@ const express = require('express'),
 
 if (conf.sockets) io.attach(conf.sockets_port);
 if (conf.cors) app.use(cors());
+app.disable('x-powered-by');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 gen_router(app, knex, express, conf);
