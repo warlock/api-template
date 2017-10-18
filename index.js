@@ -7,20 +7,20 @@ const express = require('express'),
   knexfile = require('./knexfile'),
   knex = require('knex')(knexfile[conf.mode]),
   gen_router = require('./http/router'),
-  ws = require('./sockets/events.js');
+  ws = require('./sockets/events.js')
 
 if (conf.sockets) io.attach(conf.sockets_port);
-if (conf.cors) app.use(cors());
-app.disable('x-powered-by');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-gen_router(app, knex, express, conf);
+if (conf.cors) app.use(cors())
+app.disable('x-powered-by')
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+gen_router(app, knex, express, conf)
 
 app.listen(conf.http_port, () => {
-  console.log(`HTTP PORT: ${conf.http_port}`);
-});
+  console.log(`HTTP PORT: ${conf.http_port}`)
+})
 
 io.on('connection', socket => {
-  console.log(`PORT SOCKETS: ${conf.sockets_port}`);
-  ws(socket, knex);
-});
+  console.log(`PORT SOCKETS: ${conf.sockets_port}`)
+  ws(socket, knex)
+})

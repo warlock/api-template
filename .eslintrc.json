@@ -4,6 +4,6 @@
     "sourceType": "module"
   },
   "rules": {
-    "semi": ["error", "always"]
+    "semi": ["off"]
   }
 }

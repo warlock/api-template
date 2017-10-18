@@ -61,7 +61,7 @@ module.exports = {
   },
   cors : true,
   sockets : true
-};
+}
 ```
 
 ### Database configuration and "knex" migrations:
@@ -115,10 +115,10 @@ const articles = require('./routes/articles');
 
 module.exports = (app, db, http) => {
 
-  app.use('/articles', articles(db));
-  app.use('/users', users(db));
+  app.use('/articles', articles(db))
+  app.use('/users', users(db))
 
-};
+}
 ```
 
 ### HTTP Routes configuration:
@@ -143,11 +143,11 @@ module.exports = db => {
   });
 
   http.get('/bye', (req, res) => {
-    res.json({ response : "bye" });
-  });
+    res.json({ response : "bye" })
+  })
 
-  return http;
-};
+  return http
+}
 ```
 
 ### Web sockets events configuration:
@@ -156,10 +156,10 @@ Files in "./sockets/events.js"
 module.exports = (socket, db) => {
 
   socket.on('hello', data => {
-    console.log(`Hello ${data.name}`);
-  });
+    console.log(`Hello ${data.name}`)
+  })
 
-};
+}
 ```
 
 ## Middleware or helpers in folder "./helpers"
