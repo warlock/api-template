@@ -33,12 +33,12 @@ yarn global add
 ## Console RxAPI client
 ### Create a project
 ```sh
-rxapi new project
+rxapi -new project
 ```
 
 ### Create a dummy server
 ```sh
-rxapi dummy project
+rxapi -dummy project
 ```
 
 ## Download project server with Git
