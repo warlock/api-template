@@ -9,7 +9,7 @@ const express = require('express'),
   gen_router = require('./http/router'),
   ws = require('./sockets/events.js')
 
-if (conf.sockets) io.attach(conf.sockets_port);
+if (conf.sockets) io.attach(conf.sockets_port)
 if (conf.cors) app.use(cors())
 app.disable('x-powered-by')
 app.use(bodyParser.urlencoded({ extended: true }))
